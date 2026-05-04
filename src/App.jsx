@@ -5,6 +5,8 @@ import ImprentaPage from './pages/ImprentaPage.jsx'
 import AcademicaPage from './pages/AcademicaPage.jsx'
 import CorporativaPage from './pages/CorporativaPage.jsx'
 import NotFoundPage from './pages/NotFoundPage.jsx'
+import { useEffect } from 'react'
+
 
 function getTenantPage(tenantSlug) {
   switch (tenantSlug) {
@@ -26,6 +28,20 @@ function TenantPageRenderer({ tenantSlug }) {
 
   const tenant = tenants[tenantSlug]
   const Page = getTenantPage(tenantSlug)
+
+  useEffect(() => {
+    if (tenant) {
+      // 🔤 Cambiar título
+      document.title = tenant.companyName
+
+      // 🖼️ Cambiar favicon
+      const favicon = document.querySelector("link[rel='icon']")
+
+      if (favicon) {
+        favicon.href = tenant.favicon // ej: "/favicons/imprenta.png"
+      }
+    }
+  }, [tenant])
 
   if (!tenant || !Page) {
     return <NotFoundPage />

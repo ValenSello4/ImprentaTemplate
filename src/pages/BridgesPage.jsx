@@ -4,6 +4,9 @@ import { useState } from 'react'
 
 export default function BridgesPage() {
     const [open, setOpen] = useState(false)
+    const [showForm, setShowForm] = useState(false)
+    const [email, setEmail] = useState('')
+    const [description, setDescription] = useState('')
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id)
@@ -239,10 +242,65 @@ export default function BridgesPage() {
                         Hablemos y llevemos tu idea al siguiente nivel.
                     </p>
 
-                    <button className="px-10 py-4 bg-black text-white rounded-full hover:scale-105 transition">
+                    <button
+                        onClick={() => setShowForm(true)}
+                        className="px-10 py-4 bg-black text-white rounded-full hover:scale-105 transition"
+                    >
                         Empezar ahora
                     </button>
                 </motion.div>
+
+                {showForm && (
+                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
+                        <div className="bg-white p-8 rounded-2xl w-full max-w-md">
+
+                            <h3 className="text-xl font-bold mb-4">Contanos tu idea</h3>
+
+                            <input
+                                type="email"
+                                placeholder="Tu mail"
+                                className="w-full border p-3 rounded mb-3"
+                                value={email}
+                                onChange={(e) => setEmail(e.target.value)}
+                            />
+
+                            <textarea
+                                placeholder="Descripción de la página que querés"
+                                className="w-full border p-3 rounded mb-4"
+                                rows={4}
+                                value={description}
+                                onChange={(e) => setDescription(e.target.value)}
+                            />
+
+                            <div className="flex justify-between">
+                                <button
+                                    onClick={() => setShowForm(false)}
+                                    className="text-gray-500"
+                                >
+                                    Cancelar
+                                </button>
+
+                                <button
+                                    onClick={async () => {
+                                        await fetch('/api/leads', {
+                                            method: 'POST',
+                                            headers: { 'Content-Type': 'application/json' },
+                                            body: JSON.stringify({ email, description }),
+                                        })
+
+                                        setShowForm(false)
+                                        setEmail('')
+                                        setDescription('')
+                                    }}
+                                    className="bg-black text-white px-4 py-2 rounded"
+                                >
+                                    Enviar
+                                </button>
+                            </div>
+
+                        </div>
+                    </div>
+                )}
             </section>
 
             {/* FOOTER */}
