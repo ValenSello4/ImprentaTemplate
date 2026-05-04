@@ -1,6 +1,24 @@
 import nodemailer from "nodemailer"
 
 export default async function handler(req, res) {
+  const allowedOrigins = [
+    "https://www.bridges.lat",
+    "https://bridges.lat"
+  ]
+
+  const origin = req.headers.origin
+
+  if (allowedOrigins.includes(origin)) {
+    res.setHeader("Access-Control-Allow-Origin", origin)
+  }
+
+  res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
+  res.setHeader("Access-Control-Allow-Headers", "Content-Type")
+
+  if (req.method === "OPTIONS") {
+    return res.status(200).end()
+  }
+
   if (req.method !== "POST") {
     return res.status(405).json({ error: "Only POST allowed" })
   }
@@ -12,25 +30,19 @@ export default async function handler(req, res) {
       service: "gmail",
       auth: {
         user: process.env.EMAIL,
-        pass: process.env.PASS, // app password de Gmail
+        pass: process.env.PASS,
       },
     })
 
     await transporter.sendMail({
-      from: `"Bridges Lead" <${process.env.EMAIL}>`,
+      from: `"Bridges" <${process.env.EMAIL}>`,
       to: process.env.EMAIL,
-      subject: "BRIDGES --- Nuevo cliente desde Bridges 🚀",
-      text: `
-Email: ${email}
-
-Descripción:
-${description}
-      `,
+      subject: "Nuevo lead 🚀",
+      text: `Email: ${email}\n\n${description}`,
     })
 
     return res.status(200).json({ ok: true })
-  } catch (error) {
-    console.error(error)
-    return res.status(500).json({ error: "Error sending email" })
+  } catch (err) {
+    return res.status(500).json({ error: "Mail error" })
   }
 }
