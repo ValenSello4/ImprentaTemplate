@@ -283,7 +283,7 @@ export default function BridgesPage() {
 
                                 <button
                                     onClick={async () => {
-                                        await fetch("https://TU-PROYECTO.vercel.app/api/lead", {
+                                        await fetch("https://imprenta-template-five.vercel.app", {
                                             method: "POST",
                                             headers: {
                                                 "Content-Type": "application/json",
