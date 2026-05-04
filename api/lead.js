@@ -1,12 +1,10 @@
 import nodemailer from "nodemailer"
 
 export default async function handler(req, res) {
-  // 🔥 CORS SIEMPRE (primero de todo)
   res.setHeader("Access-Control-Allow-Origin", "https://www.bridges.lat")
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
   res.setHeader("Access-Control-Allow-Headers", "Content-Type")
 
-  // ⚡ Preflight obligatorio
   if (req.method === "OPTIONS") {
     return res.status(200).end()
   }
@@ -15,9 +13,17 @@ export default async function handler(req, res) {
     return res.status(405).json({ error: "Only POST allowed" })
   }
 
-  const { email, description } = req.body
-
   try {
+    const body = typeof req.body === "string"
+      ? JSON.parse(req.body)
+      : req.body
+
+    const { email, description } = body
+
+    if (!email || !description) {
+      return res.status(400).json({ error: "Missing fields" })
+    }
+
     const transporter = nodemailer.createTransport({
       service: "gmail",
       auth: {
@@ -34,8 +40,9 @@ export default async function handler(req, res) {
     })
 
     return res.status(200).json({ ok: true })
+
   } catch (err) {
-    console.error(err)
-    return res.status(500).json({ error: "Mail error" })
+    console.error("API ERROR:", err)
+    return res.status(500).json({ error: err.message })
   }
 }
