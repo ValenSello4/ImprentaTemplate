@@ -3,10 +3,16 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
+
+   "homepage": "https://bridges.lat",
   "scripts": {
     "dev": "vite --port 5174 --strictPort",
     "build": "vite build",
-    "preview": "vite preview"
+    "preview": "vite preview",
+
+    "predeploy": "npm run build",
+    "deploy": "gh-pages -d dist"
+    
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
@@ -17,8 +23,12 @@
   "devDependencies": {
     "@vitejs/plugin-react": "^4.3.1",
     "autoprefixer": "^10.4.19",
+    "gh-pages": "^6.3.0",
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.4",
     "vite": "^5.4.1"
   }
+  
+
+  
 }
