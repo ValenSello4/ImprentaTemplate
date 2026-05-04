@@ -55,8 +55,9 @@ export default function BridgesPage() {
 
             {/* HEADER */}
             <motion.header
-                initial={{ y: -80, opacity: 0 }}
-                animate={{ y: 0, opacity: 1 }}
+                initial={{ opacity: 0 }}
+                animate={{ opacity: 1 }}
+                transition={{ duration: 1 }}
                 className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200"
             >
                 <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
@@ -282,10 +283,15 @@ export default function BridgesPage() {
 
                                 <button
                                     onClick={async () => {
-                                        await fetch('/api/leads', {
-                                            method: 'POST',
-                                            headers: { 'Content-Type': 'application/json' },
-                                            body: JSON.stringify({ email, description }),
+                                        await fetch("https://TU-PROYECTO.vercel.app/api/lead", {
+                                            method: "POST",
+                                            headers: {
+                                                "Content-Type": "application/json",
+                                            },
+                                            body: JSON.stringify({
+                                                email,
+                                                description,
+                                            }),
                                         })
 
                                         setShowForm(false)

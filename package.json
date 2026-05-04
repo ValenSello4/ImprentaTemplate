@@ -3,19 +3,17 @@
   "private": true,
   "version": "0.0.1",
   "type": "module",
-
-   "homepage": "https://bridges.lat",
+  "homepage": "https://bridges.lat",
   "scripts": {
     "dev": "vite --port 5174 --strictPort",
     "build": "vite build",
     "preview": "vite preview",
-
     "predeploy": "npm run build",
     "deploy": "gh-pages -d dist"
-    
   },
   "dependencies": {
     "framer-motion": "^12.38.0",
+    "nodemailer": "^8.0.7",
     "react": "^18.3.1",
     "react-dom": "^18.3.1",
     "react-router-dom": "^6.16.0"
@@ -27,8 +25,17 @@
     "postcss": "^8.4.35",
     "tailwindcss": "^3.4.4",
     "vite": "^5.4.1"
+  },
+  "description": "Para personalizar tu página de imprenta, puedes agregar estas imágenes:",
+  "main": "postcss.config.js",
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/ValenSello4/ImprentaTemplate.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/ValenSello4/ImprentaTemplate/issues"
   }
-  
-
-  
 }
