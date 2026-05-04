@@ -1,5 +1,6 @@
 import { Link, Route, Routes, useParams } from 'react-router-dom'
 import { getTenantSlugFromHost, tenantKeys, tenants } from './tenantConfig.js'
+import BridgesPage from './pages/BridgesPage.jsx'
 import ImprentaPage from './pages/ImprentaPage.jsx'
 import AcademicaPage from './pages/AcademicaPage.jsx'
 import CorporativaPage from './pages/CorporativaPage.jsx'
@@ -69,7 +70,9 @@ function TenantPathPage() {
 function App() {
   return (
     <Routes>
-      <Route path="/" element={<TenantSelection />} />
+      <Route path="/" element={<BridgesPage />} />
+      <Route path="/tenants" element={<TenantSelection />} />
+      <Route path="/tenants/:tenantSlug" element={<TenantPathPage />} />
       <Route path="/:tenantSlug" element={<TenantPathPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
