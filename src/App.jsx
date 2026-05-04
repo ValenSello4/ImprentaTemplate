@@ -42,16 +42,16 @@ function TenantSelection() {
   }
 
   return (
-    <div className="min-h-screen bg-slate-50 text-slate-900 py-24 px-6">
-      <div className="mx-auto max-w-4xl rounded-[2rem] border border-slate-200 bg-white p-10 shadow-xl">
-        <h1 className="text-4xl font-semibold text-slate-950">Selecciona tu sitio</h1>
-        <p className="mt-4 text-lg text-slate-600">En un futuro cada tenant tendrá su propio dominio, pero por ahora puedes probarlos con estas rutas.</p>
+    <div className="min-h-screen bg-white text-white-900 py-24 px-6">
+      <div className="mx-auto max-w-4xl rounded-[2rem] border border-white-200 bg-white p-10 shadow-xl">
+        <h1 className="text-4xl font-semibold text-white-950">Selecciona tu sitio</h1>
+        <p className="mt-4 text-lg text-white-600">En un futuro cada tenant tendrá su propio dominio, pero por ahora puedes probarlos con estas rutas.</p>
         <div className="mt-10 grid gap-4 sm:grid-cols-3">
           {tenantKeys.map((slug) => (
             <Link
               key={slug}
               to={`/${slug}`}
-              className="rounded-[1.5rem] border border-slate-200 bg-slate-100 px-6 py-6 text-center text-lg font-semibold text-slate-900 transition hover:-translate-y-1 hover:bg-slate-50"
+              className="rounded-[1.5rem] border border-white-200 bg-white-100 px-6 py-6 text-center text-lg font-semibold text-white-900 transition hover:-translate-y-1 hover:bg-white-50"
             >
               {tenants[slug].companyName}
             </Link>

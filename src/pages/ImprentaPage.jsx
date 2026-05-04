@@ -4,15 +4,15 @@ function ImprentaPage({ tenant }) {
   const accent = getAccentStyles(tenant.accent)
 
   return (
-    <div className="min-h-screen bg-gradient-to-br from-amber-100 via-[#f3e0c1] to-[#f7e7c1] text-slate-950" style={{ backgroundImage: `url('${tenant.assetPath}/background.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
+    <div className="min-h-screen bg-gradient-to-br from-amber-100 via-[#f3e0c1] to-[#f7e7c1] text-white-950" style={{ backgroundImage: `url('${tenant.assetPath}/background.jpg')`, backgroundSize: 'cover', backgroundPosition: 'center', backgroundAttachment: 'fixed' }}>
       <header className="mx-auto flex max-w-7xl items-center justify-between px-6 py-6 sm:px-10">
-        <div className="flex items-center gap-3 text-lg font-semibold text-slate-950">
+        <div className="flex items-center gap-3 text-lg font-semibold text-white-950">
           <img src={`${tenant.assetPath}/logo.png`} alt="Logo" className="h-12 w-12 rounded-3xl border border-amber-300 bg-white/80" />
           {tenant.companyName}
         </div>
-        <nav className="hidden gap-8 text-slate-700 md:flex">
+        <nav className="hidden gap-8 text-white-700 md:flex">
           {tenant.menu.map((item) => (
-            <a key={item.href} href={item.href} className="rounded-full border border-amber-300 bg-white/90 px-4 py-2 text-slate-800 transition hover:bg-white">
+            <a key={item.href} href={item.href} className="rounded-full border border-amber-300 bg-white/90 px-4 py-2 text-white-800 transition hover:bg-white">
               {item.label}
             </a>
           ))}
@@ -27,14 +27,14 @@ function ImprentaPage({ tenant }) {
               <div className={`inline-flex rounded-full px-4 py-2 text-sm font-semibold uppercase tracking-[0.3em] ring-1 ${accent.badge}`}>
                 {tenant.heroBadge}
               </div>
-              <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-slate-950 sm:text-6xl">
+              <h1 className="max-w-3xl text-5xl font-semibold tracking-tight text-white-950 sm:text-6xl">
                 {tenant.heroTitle}
               </h1>
-              <p className="max-w-xl text-lg leading-8 text-slate-600">{tenant.heroText}</p>
+              <p className="max-w-xl text-lg leading-8 text-white-600">{tenant.heroText}</p>
               <p className={`max-w-xl text-lg leading-8 ${accent.highlight}`}>{tenant.heroHighlight}</p>
               <div className="flex flex-wrap gap-4">
                 {tenant.buttons.map((button) => (
-                  <a key={button.href} href={button.href} className={`inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-rustic transition ${button.primary ? accent.button : `border border-amber-400 bg-paper-surface text-slate-900 ${accent.secondary}`}`}>
+                  <a key={button.href} href={button.href} className={`inline-flex items-center justify-center rounded-full px-6 py-3 text-sm font-semibold shadow-rustic transition ${button.primary ? accent.button : `border border-amber-400 bg-paper-surface text-white-900 ${accent.secondary}`}`}>
                     {button.label}
                   </a>
                 ))}
@@ -45,8 +45,8 @@ function ImprentaPage({ tenant }) {
               {tenant.stats.map((stat) => (
                 <div key={stat.label} className={`rounded-3xl p-6 ring-1 ${accent.card}`}>
                   <p className="text-sm font-semibold uppercase tracking-[0.3em]">{stat.label}</p>
-                  <p className="mt-4 text-4xl font-bold text-slate-950">{stat.value}</p>
-                  <p className="mt-2 text-sm leading-6 text-slate-600">{stat.detail}</p>
+                  <p className="mt-4 text-4xl font-bold text-white-950">{stat.value}</p>
+                  <p className="mt-2 text-sm leading-6 text-white-600">{stat.detail}</p>
                 </div>
               ))}
             </div>
@@ -56,9 +56,9 @@ function ImprentaPage({ tenant }) {
         <section className="mt-16 grid gap-6 md:grid-cols-3">
           {tenant.cards.map((item) => (
             <article key={item.title} className="rounded-[2rem] border border-wood-panel bg-paper-surface p-8 shadow-rustic transition hover:-translate-y-1 hover:shadow-xl">
-              <p className="text-sm uppercase tracking-[0.3em] text-slate-600">{item.subtitle}</p>
-              <h3 className="mt-4 text-2xl font-semibold text-slate-950">{item.title}</h3>
-              <p className="mt-4 text-slate-700">Diseños completos con papeles y acabados cuidados para comunicar tu marca con impacto.</p>
+              <p className="text-sm uppercase tracking-[0.3em] text-white-600">{item.subtitle}</p>
+              <h3 className="mt-4 text-2xl font-semibold text-white-950">{item.title}</h3>
+              <p className="mt-4 text-white-700">Diseños completos con papeles y acabados cuidados para comunicar tu marca con impacto.</p>
             </article>
           ))}
         </section>
@@ -66,15 +66,15 @@ function ImprentaPage({ tenant }) {
         <section id="servicios" className="mt-20 space-y-8">
           <div className="max-w-3xl">
             <p className={`text-sm font-semibold uppercase tracking-[0.3em] ${accent.highlight}`}>Servicios</p>
-            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-slate-950 sm:text-5xl">Impresión, copias y librería en un solo lugar</h2>
-            <p className="mt-5 text-lg leading-8 text-slate-600">Elaboramos material impreso, encuadernados, stickers y cuadernillos con atención personalizada para estudiantes, tiendas y emprendedores.</p>
+            <h2 className="mt-3 text-4xl font-semibold tracking-tight text-white-950 sm:text-5xl">Impresión, copias y librería en un solo lugar</h2>
+            <p className="mt-5 text-lg leading-8 text-white-600">Elaboramos material impreso, encuadernados, stickers y cuadernillos con atención personalizada para estudiantes, tiendas y emprendedores.</p>
           </div>
 
           <div className="grid gap-6 lg:grid-cols-3">
             {tenant.services.map((service) => (
               <div key={service.title} className="rounded-[2rem] border border-wood-panel bg-paper-surface p-7 shadow-rustic transition hover:-translate-y-1 hover:shadow-xl">
-                <h3 className="text-2xl font-semibold text-slate-950">{service.title}</h3>
-                <p className="mt-3 text-slate-700">{service.detail}</p>
+                <h3 className="text-2xl font-semibold text-white-950">{service.title}</h3>
+                <p className="mt-3 text-white-700">{service.detail}</p>
               </div>
             ))}
           </div>
@@ -84,8 +84,8 @@ function ImprentaPage({ tenant }) {
           <div className="flex flex-col gap-8 lg:flex-row lg:items-center lg:justify-between">
             <div className="max-w-2xl">
               <p className="text-sm font-semibold uppercase tracking-[0.3em] text-amber-900">Ubicación</p>
-              <h2 className="mt-3 text-3xl font-semibold text-slate-950">Visítanos en nuestra imprenta</h2>
-              <p className="mt-4 text-lg leading-8 text-slate-700">{tenant.mapAddress}</p>
+              <h2 className="mt-3 text-3xl font-semibold text-white-950">Visítanos en nuestra imprenta</h2>
+              <p className="mt-4 text-lg leading-8 text-white-700">{tenant.mapAddress}</p>
               <a
                 href={`https://www.google.com/maps/search/?api=1&query=${encodeURIComponent(tenant.mapAddress)}`}
                 target="_blank"
