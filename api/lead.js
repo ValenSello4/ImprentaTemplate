@@ -1,20 +1,12 @@
 import nodemailer from "nodemailer"
 
 export default async function handler(req, res) {
-  const allowedOrigins = [
-    "https://www.bridges.lat",
-    "https://bridges.lat"
-  ]
-
-  const origin = req.headers.origin
-
-  if (allowedOrigins.includes(origin)) {
-    res.setHeader("Access-Control-Allow-Origin", origin)
-  }
-
+  // 🌐 CORS (SIEMPRE primero)
+  res.setHeader("Access-Control-Allow-Origin", "*")
   res.setHeader("Access-Control-Allow-Methods", "POST, OPTIONS")
   res.setHeader("Access-Control-Allow-Headers", "Content-Type")
 
+  // 🧠 preflight request (MUY importante)
   if (req.method === "OPTIONS") {
     return res.status(200).end()
   }
@@ -43,6 +35,7 @@ export default async function handler(req, res) {
 
     return res.status(200).json({ ok: true })
   } catch (err) {
+    console.error(err)
     return res.status(500).json({ error: "Mail error" })
   }
 }
