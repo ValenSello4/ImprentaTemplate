@@ -24,7 +24,7 @@ export default async function handler(req, res) {
 
         await resend.emails.send({
             from: 'Bridges <contacto@bridges.lat>',
-            to: 'tucorreo@gmail.com', // donde querés recibir
+            to: 'valensello4444@gmail.com', // donde querés recibir
             reply_to: email,
             subject: 'Nuevo lead 🚀',
             html: `
