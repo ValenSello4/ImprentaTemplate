@@ -52,6 +52,12 @@ export default function BridgesPage() {
         viewport: { once: true },
         transition: { duration: 0.6 }
     }
+     const fadeOpacityUp = {
+        initial: { opacity: 0},
+        whileInView: { opacity: 1},
+        viewport: { once: true },
+        transition: { duration: 0.6 }
+    }
 
     return (
         <div className="bg-white text-black overflow-hidden">
@@ -220,8 +226,10 @@ export default function BridgesPage() {
                 </motion.div>
 
                 {showForm && (
-                    <div className="fixed inset-0 bg-black/50 flex items-center justify-center z-50">
-                        <div className="bg-white p-8 rounded-2xl w-full max-w-md">
+                    <motion.div
+                        {...fadeOpacityUp}
+                        className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 md:p-32 p-8">
+                        <div className=" bg-white p-8 pb-52 rounded-2xl w-full h-full ">
 
                             <h3 className="text-xl font-bold mb-4">Contanos tu idea</h3>
 
@@ -235,7 +243,7 @@ export default function BridgesPage() {
 
                             <textarea
                                 placeholder="Descripción"
-                                className="w-full border p-3 rounded mb-4"
+                                className="w-full h-full border p-3 rounded mb-4"
                                 rows={4}
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
@@ -263,7 +271,7 @@ export default function BridgesPage() {
                             </div>
 
                         </div>
-                    </div>
+                    </motion.div>
                 )}
             </section>
 
