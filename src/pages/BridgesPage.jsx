@@ -101,7 +101,6 @@ export default function BridgesPage() {
                         <motion.img
                             src="/HeroBlack.webp"
                             alt="hero"
-                            loading="lazy"
                             decoding="async"
                             className="object-contain grayscale mx-auto md:mx-0 w-[300px] sm:w-[450px] md:w-[650px]"
                         />
