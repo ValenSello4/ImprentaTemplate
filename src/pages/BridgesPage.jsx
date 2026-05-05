@@ -99,7 +99,7 @@ export default function BridgesPage() {
 
                     <motion.div {...fadeUp}>
                         <motion.img
-                            src="/HeroBlack.png"
+                            src="/HeroBlack.webp"
                             alt="hero"
                             loading="lazy"
                             decoding="async"
