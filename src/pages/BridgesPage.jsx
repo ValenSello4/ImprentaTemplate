@@ -2,6 +2,7 @@
 import { motion } from 'framer-motion'
 import { useState } from 'react'
 
+
 export default function BridgesPage() {
     const [open, setOpen] = useState(false)
     const [showForm, setShowForm] = useState(false)
@@ -11,15 +12,10 @@ export default function BridgesPage() {
     const scrollToSection = (id) => {
         const element = document.getElementById(id)
         if (!element) return
-
-        const yOffset = -100
-        const y = element.getBoundingClientRect().top + window.pageYOffset + yOffset
-
-        window.scrollTo({
-            top: y,
-            behavior: 'smooth',
-        })
+        element.scrollIntoView({ behavior: 'smooth' })
     }
+
+    const isDesktop = typeof window !== 'undefined' && window.innerWidth > 768
 
     const services = [
         {
@@ -50,6 +46,13 @@ export default function BridgesPage() {
         { number: '8+', label: 'Años' },
     ]
 
+    const fadeUp = {
+        initial: { opacity: 0, y: 30 },
+        whileInView: { opacity: 1, y: 0 },
+        viewport: { once: true },
+        transition: { duration: 0.6 }
+    }
+
     return (
         <div className="bg-white text-black overflow-hidden">
 
@@ -57,36 +60,23 @@ export default function BridgesPage() {
             <motion.header
                 initial={{ opacity: 0 }}
                 animate={{ opacity: 1 }}
-                transition={{ duration: 1 }}
-                className="fixed top-0 left-0 w-full z-50 backdrop-blur-md bg-white/70 border-b border-gray-200"
+                className="fixed top-0 left-0 w-full z-50 bg-white border-b border-gray-200"
             >
                 <div className="max-w-6xl mx-auto flex items-center justify-between px-6 py-4">
 
                     <span className="font-bold text-xl">Bridges</span>
 
-                    {/* DESKTOP */}
                     <nav className="hidden md:flex gap-8 text-sm">
-                        <button onClick={() => scrollToSection('servicios')} className="hover:text-gray-500 transition">
-                            Servicios
-                        </button>
-                        <button onClick={() => scrollToSection('about')} className="hover:text-gray-500 transition">
-                            Nosotros
-                        </button>
-                        <button onClick={() => scrollToSection('contacto')} className="hover:text-gray-500 transition">
-                            Contacto
-                        </button>
+                        <button onClick={() => scrollToSection('servicios')}>Servicios</button>
+                        <button onClick={() => scrollToSection('about')}>Nosotros</button>
+                        <button onClick={() => scrollToSection('contacto')}>Contacto</button>
                     </nav>
 
-                    {/* MOBILE BUTTON */}
-                    <button
-                        onClick={() => setOpen(!open)}
-                        className="md:hidden text-2xl"
-                    >
+                    <button onClick={() => setOpen(!open)} className="md:hidden text-2xl">
                         ☰
                     </button>
                 </div>
 
-                {/* MOBILE MENU */}
                 {open && (
                     <div className="md:hidden px-6 pb-6 flex flex-col gap-4 text-sm">
                         <button onClick={() => { scrollToSection('servicios'); setOpen(false) }}>Servicios</button>
@@ -97,56 +87,42 @@ export default function BridgesPage() {
             </motion.header>
 
             {/* HERO */}
-            <section className="relative min-h-screen flex items-center justify-center px-6 pt-0 overflow-hidden bg-white">
+            <section className="min-h-screen flex items-center justify-center px-6">
 
                 <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
 
-                    {/* IMAGEN */}
-                    <motion.img
-                        src="/HeroBlack.png"
-                        alt="background"
-                        initial={{ opacity: 0, x: -50 }}
-                        animate={{ opacity: 1, x: 0 }}
-                        transition={{ duration: 1 }}
-                        className="w-[300px] sm:w-[450px] md:w-[650px] lg:w-[750px] object-contain grayscale mx-auto md:mx-0"
-                    />
+                    {/* IMAGEN OPTIMIZADA */}
+                    <motion.div {...fadeUp}>
+                        <motion.img
+                            src="/HeroBlack.png"
+                            alt="hero"
+                            loading="lazy"
+                            decoding="async"
+                            className="object-contain grayscale mx-auto md:mx-0 w-[300px] sm:w-[450px] md:w-[650px]"
+                        />
+                    </motion.div>
 
-                    {/* CONTENIDO */}
-                    <div className="text-center md:text-left text-black">
+                    <div className="text-center md:text-left">
 
-                        <motion.h1
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            className="text-4xl sm:text-6xl md:text-8xl font-extrabold tracking-tight"
-                        >
+                        <motion.h1 {...fadeUp} className="text-4xl sm:text-6xl md:text-8xl font-extrabold">
                             Bridges
                         </motion.h1>
 
-                        <motion.p
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.2 }}
-                            className="mt-6 text-lg sm:text-xl text-gray-600"
-                        >
+                        <motion.p {...fadeUp} className="mt-6 text-lg text-gray-600">
                             Conectamos ideas con tecnología para crear productos digitales.
                         </motion.p>
 
-                        <motion.div
-                            initial={{ opacity: 0, y: 40 }}
-                            animate={{ opacity: 1, y: 0 }}
-                            transition={{ delay: 0.4 }}
-                            className="mt-10 flex flex-col sm:flex-row justify-center md:justify-start gap-4"
-                        >
+                        <motion.div {...fadeUp} className="mt-10 flex flex-col sm:flex-row gap-4 justify-center md:justify-start">
                             <button
                                 onClick={() => scrollToSection('servicios')}
-                                className="px-8 py-3 bg-black text-white rounded-full hover:scale-105 transition"
+                                className="px-8 py-3 bg-black text-white rounded-full"
                             >
                                 Explorar
                             </button>
 
                             <button
                                 onClick={() => scrollToSection('contacto')}
-                                className="px-8 py-3 border border-black rounded-full hover:bg-black hover:text-white transition"
+                                className="px-8 py-3 border border-black rounded-full"
                             >
                                 Contacto
                             </button>
@@ -157,15 +133,10 @@ export default function BridgesPage() {
             </section>
 
             {/* STATS */}
-            <section className="py-20 px-6 border-t border-gray-200">
-                <div className="max-w-4xl mx-auto grid grid-cols-1 sm:grid-cols-3 text-center gap-10">
+            <section className="py-20 px-6 border-t">
+                <div className="max-w-4xl mx-auto grid sm:grid-cols-3 text-center gap-10">
                     {stats.map((stat, i) => (
-                        <motion.div
-                            key={i}
-                            initial={{ opacity: 0, y: 30 }}
-                            whileInView={{ opacity: 1, y: 0 }}
-                            transition={{ delay: i * 0.2 }}
-                        >
+                        <motion.div key={i} {...fadeUp}>
                             <p className="text-4xl font-bold">{stat.number}</p>
                             <p className="text-gray-400 mt-2">{stat.label}</p>
                         </motion.div>
@@ -177,26 +148,20 @@ export default function BridgesPage() {
             <section id="servicios" className="py-28 px-6">
                 <div className="max-w-6xl mx-auto">
 
-                    <motion.h2
-                        initial={{ opacity: 0 }}
-                        whileInView={{ opacity: 1 }}
-                        className="text-center text-4xl font-bold mb-16"
-                    >
+                    <motion.h2 {...fadeUp} className="text-center text-4xl font-bold mb-16">
                         Servicios
                     </motion.h2>
 
-                    <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
+                    <div className="grid md:grid-cols-2 gap-8">
                         {services.map((service, i) => (
                             <motion.div
                                 key={i}
-                                initial={{ opacity: 0, y: 40 }}
-                                whileInView={{ opacity: 1, y: 0 }}
-                                transition={{ delay: i * 0.1 }}
-                                whileHover={{ scale: 1.03 }}
-                                className="p-8 rounded-3xl border border-gray-200 bg-white hover:shadow-2xl transition"
+                                {...fadeUp}
+                                whileHover={isDesktop ? { scale: 1.03 } : {}}
+                                className="p-8 rounded-3xl border bg-white"
                             >
                                 <div className="text-4xl mb-4">{service.icon}</div>
-                                <h3 className="text-xl font-semibold mb-2">{service.title}</h3>
+                                <h3 className="text-xl font-semibold">{service.title}</h3>
                                 <p className="text-gray-600">{service.description}</p>
                             </motion.div>
                         ))}
@@ -205,12 +170,8 @@ export default function BridgesPage() {
             </section>
 
             {/* ABOUT */}
-            <section id="about" className="py-28 px-6 bg-white border-y border-gray-200">
-                <motion.div
-                    initial={{ opacity: 0 }}
-                    whileInView={{ opacity: 1 }}
-                    className="max-w-3xl mx-auto text-center"
-                >
+            <section id="about" className="py-28 px-6 border-y">
+                <motion.div {...fadeUp} className="max-w-3xl mx-auto text-center">
                     <h2 className="text-4xl font-bold mb-6">
                         No construimos software.
                         <br />
@@ -220,32 +181,19 @@ export default function BridgesPage() {
                     <p className="text-gray-600 mb-10">
                         Nuestra misión es simplificar la tecnología para que puedas enfocarte en hacer crecer tu negocio.
                     </p>
-
-                    <div className="flex flex-col sm:flex-row justify-center gap-4 text-sm text-gray-700">
-                        <span>✓ Innovación</span>
-                        <span>✓ Velocidad</span>
-                        <span>✓ Resultados</span>
-                    </div>
                 </motion.div>
             </section>
 
-            {/* CTA */}
+            {/* CONTACTO */}
             <section id="contacto" className="py-32 px-6 text-center">
-                <motion.div
-                    initial={{ opacity: 0, scale: 0.95 }}
-                    whileInView={{ opacity: 1, scale: 1 }}
-                >
+                <motion.div {...fadeUp}>
                     <h2 className="text-3xl sm:text-5xl font-bold mb-6">
                         ¿Listo para dar el salto?
                     </h2>
 
-                    <p className="text-gray-600 mb-10">
-                        Hablemos y llevemos tu idea al siguiente nivel.
-                    </p>
-
                     <button
                         onClick={() => setShowForm(true)}
-                        className="px-10 py-4 bg-black text-white rounded-full hover:scale-105 transition"
+                        className="px-10 py-4 bg-black text-white rounded-full"
                     >
                         Empezar ahora
                     </button>
@@ -266,7 +214,7 @@ export default function BridgesPage() {
                             />
 
                             <textarea
-                                placeholder="Descripción de la página que querés"
+                                placeholder="Descripción"
                                 className="w-full border p-3 rounded mb-4"
                                 rows={4}
                                 value={description}
@@ -274,24 +222,14 @@ export default function BridgesPage() {
                             />
 
                             <div className="flex justify-between">
-                                <button
-                                    onClick={() => setShowForm(false)}
-                                    className="text-gray-500"
-                                >
-                                    Cancelar
-                                </button>
+                                <button onClick={() => setShowForm(false)}>Cancelar</button>
 
                                 <button
                                     onClick={async () => {
-                                        await fetch("https://imprenta-template-five.vercel.app/api/lead", {
+                                        await fetch("/api/lead", {
                                             method: "POST",
-                                            headers: {
-                                                "Content-Type": "application/json",
-                                            },
-                                            body: JSON.stringify({
-                                                email,
-                                                description,
-                                            }),
+                                            headers: { "Content-Type": "application/json" },
+                                            body: JSON.stringify({ email, description }),
                                         })
 
                                         setShowForm(false)
@@ -309,7 +247,6 @@ export default function BridgesPage() {
                 )}
             </section>
 
-            {/* FOOTER */}
             <footer className="py-10 text-center text-gray-500 border-t">
                 © 2026 Bridges
             </footer>
