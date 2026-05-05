@@ -3,6 +3,7 @@ import { motion } from 'framer-motion'
 import { useState } from 'react'
 import { Globe, Monitor, Wrench, Zap, MapPin } from 'lucide-react'
 
+
 export default function BridgesPage() {
     const [open, setOpen] = useState(false)
     const [showForm, setShowForm] = useState(false)
@@ -41,9 +42,10 @@ export default function BridgesPage() {
     ]
 
     const stats = [
-        { number: '100+', label: 'Proyectos' },
-        { number: '50+', label: 'Clientes' },
-        { number: '8+', label: 'Años' },
+        { title: 'Ingeniería', label: 'Contamos con conocimientos de análisis e ingeniería en sistemas.' },
+        { title: 'Optimización', label: 'Buscamos la resolución de tus problemas de la forma mas optimizada.'},
+        { title: 'Tecnología', label: 'Tenemos conciencia de los avances tecnológicos y su impulso para el desarrollo de sofware.' },
+        
     ]
 
     const fadeUp = {
@@ -141,31 +143,37 @@ export default function BridgesPage() {
                 <div className="max-w-4xl mx-auto grid sm:grid-cols-3 text-center gap-10">
                     {stats.map((stat, i) => (
                         <motion.div key={i} {...fadeUp}>
-                            <p className="text-4xl font-bold">{stat.number}</p>
-                            <p className="text-gray-400 mt-2">{stat.label}</p>
+                            <p className="text-black-400 font-bold mt-2 text-2xl">{stat.title}</p>
+                            <p className="text-gray-500 font-semibold mt-2">{stat.label}</p>
                         </motion.div>
                     ))}
                 </div>
             </section>
+
+
+
 
             {/* UBICACIÓN */}
             <section className="py-20 px-6 border-t">
                 <div className="max-w-4xl mx-auto">
                     <motion.div
                         {...fadeUp}
-                        className="p-10 rounded-3xl bg-white flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+                        className="p-10 rounded-3xl bg-white flex flex-col md:flex-row items-center justify-around gap-6 text-center md:text-left"
                     >
                         <h3 className="text-2xl font-semibold">
                             ¿De dónde somos?
                         </h3 >
 
-                        <div className="flex items-center gap-2 text-lg text-black-600 flex-col">
+                        <div className="flex items-center gap-2 text-lg text-black-600 flex-col md:border md:rounded-3xl md:p-16">
                             <MapPin size={50} strokeWidth={1.5} />
                             <span>Rosario, Santa Fe</span>
                         </div>
                     </motion.div>
                 </div>
             </section>
+
+
+
 
             {/* SERVICES */}
             <section id="servicios" className="py-28 px-6 border-t">
