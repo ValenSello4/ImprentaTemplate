@@ -1,4 +1,6 @@
-import nodemailer from "nodemailer"
+import { Resend } from 'resend'
+
+const resend = new Resend(process.env.RESEND_API_KEY)
 
 export default async function handler(req, res) {
     res.setHeader("Access-Control-Allow-Origin", "https://www.bridges.lat")
@@ -14,30 +16,21 @@ export default async function handler(req, res) {
     }
 
     try {
-        const body = typeof req.body === "string"
-            ? JSON.parse(req.body)
-            : req.body
-
-        const { email, description } = body
+        const { email, description } = req.body
 
         if (!email || !description) {
             return res.status(400).json({ error: "Missing fields" })
         }
 
-        const transporter = nodemailer.createTransport({
-            service: "gmail",
-            auth: {
-                user: process.env.EMAIL,
-                pass: process.env.PASS,
-            },
-        })
-
-        await transporter.sendMail({
-            from: `"Bridges" <${process.env.EMAIL}>`,
-            to: process.env.EMAIL,
-            replyTo: email,
-            subject: "Nuevo lead 🚀",
-            text: `Email: ${email}\n\n${description}`,
+        await resend.emails.send({
+            from: 'Bridges <contacto@bridges.lat>',
+            to: 'tucorreo@gmail.com', // donde querés recibir
+            reply_to: email,
+            subject: 'Nuevo lead 🚀',
+            html: `
+                <p><strong>Email:</strong> ${email}</p>
+                <p>${description}</p>
+            `,
         })
 
         return res.status(200).json({ ok: true })
