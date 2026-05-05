@@ -1,7 +1,7 @@
 'use client'
 import { motion } from 'framer-motion'
 import { useState } from 'react'
-
+import { Globe, Monitor, Wrench, Zap, MapPin } from 'lucide-react'
 
 export default function BridgesPage() {
     const [open, setOpen] = useState(false)
@@ -21,22 +21,22 @@ export default function BridgesPage() {
         {
             title: 'Soluciones Digitales',
             description: 'Conectamos tus ideas con tecnología para escalar tu negocio.',
-            icon: '🌐',
+            icon: <Globe size={32} strokeWidth={1.5} />,
         },
         {
             title: 'Desarrollo Web',
             description: 'Experiencias rápidas, modernas y pensadas para convertir.',
-            icon: '💻',
+            icon: <Monitor size={32} strokeWidth={1.5} />,
         },
         {
             title: 'Consultoría Estratégica',
             description: 'Optimizamos procesos y decisiones clave.',
-            icon: '🎯',
+            icon: <Wrench size={32} strokeWidth={1.5} />,
         },
         {
             title: 'Soporte 24/7',
             description: 'Siempre disponibles para vos.',
-            icon: '⚡',
+            icon: <Zap size={32} strokeWidth={1.5} />,
         },
     ]
 
@@ -91,7 +91,6 @@ export default function BridgesPage() {
 
                 <div className="max-w-6xl w-full grid md:grid-cols-2 gap-10 items-center">
 
-                    {/* IMAGEN OPTIMIZADA */}
                     <motion.div {...fadeUp}>
                         <motion.img
                             src="/HeroBlack.png"
@@ -144,8 +143,27 @@ export default function BridgesPage() {
                 </div>
             </section>
 
+            {/* UBICACIÓN */}
+            <section className="py-20 px-6 border-t">
+                <div className="max-w-4xl mx-auto">
+                    <motion.div
+                        {...fadeUp}
+                        className="p-10 rounded-3xl bg-white flex flex-col md:flex-row items-center justify-between gap-6 text-center md:text-left"
+                    >
+                        <h3 className="text-2xl font-semibold">
+                            ¿De dónde somos?
+                        </h3 >
+
+                        <div className="flex items-center gap-2 text-lg text-black-600 flex-col">
+                            <MapPin size={50} strokeWidth={1.5} />
+                            <span>Rosario, Santa Fe</span>
+                        </div>
+                    </motion.div>
+                </div>
+            </section>
+
             {/* SERVICES */}
-            <section id="servicios" className="py-28 px-6">
+            <section id="servicios" className="py-28 px-6 border-t">
                 <div className="max-w-6xl mx-auto">
 
                     <motion.h2 {...fadeUp} className="text-center text-4xl font-bold mb-16">
@@ -160,7 +178,9 @@ export default function BridgesPage() {
                                 whileHover={isDesktop ? { scale: 1.03 } : {}}
                                 className="p-8 rounded-3xl border bg-white"
                             >
-                                <div className="text-4xl mb-4">{service.icon}</div>
+                                <div className="mb-4 text-black">
+                                    {service.icon}
+                                </div>
                                 <h3 className="text-xl font-semibold">{service.title}</h3>
                                 <p className="text-gray-600">{service.description}</p>
                             </motion.div>
@@ -179,7 +199,7 @@ export default function BridgesPage() {
                     </h2>
 
                     <p className="text-gray-600 mb-10">
-                        Nuestra misión es simplificar la tecnología para que puedas enfocarte en hacer crecer tu negocio.
+                        Nuestra misión es construir el paso tecnologico entre tus clientes, para que pudas enfocarte en hacer crecer tu negocio.
                     </p>
                 </motion.div>
             </section>
@@ -188,7 +208,7 @@ export default function BridgesPage() {
             <section id="contacto" className="py-32 px-6 text-center">
                 <motion.div {...fadeUp}>
                     <h2 className="text-3xl sm:text-5xl font-bold mb-6">
-                        ¿Listo para dar el salto?
+                        ¿Listo para levantar el tuyo?
                     </h2>
 
                     <button
