@@ -33,7 +33,7 @@ export default async function handler(req, res) {
     })
 
     await transporter.sendMail({
-      from: `"Bridges" <${process.env.EMAIL}>`,
+      from: `"Bridges" <no-reply@bridges.lat>`,
       to: process.env.EMAIL,
       subject: "Nuevo lead 🚀",
       text: `Email: ${email}\n\n${description}`,
