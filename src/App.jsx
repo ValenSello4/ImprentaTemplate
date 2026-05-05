@@ -4,7 +4,7 @@ import { useEffect } from "react";
 import BridgesPage from "./pages/BridgesPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 
-import AcademicaPage from "./pages/academica/AcademicaPage.jsx";
+import AcademicaPage from "./pages/Academica/AcademicaPage.jsx";
 
 import tenants from "./data/tenants.json";
 
