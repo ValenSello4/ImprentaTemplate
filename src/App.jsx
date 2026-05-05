@@ -1,62 +1,55 @@
-import { Link, Route, Routes, useParams } from 'react-router-dom'
-import { useEffect } from 'react'
+import { Link, Route, Routes, useParams } from "react-router-dom";
+import { useEffect } from "react";
 
-import BridgesPage from './pages/BridgesPage.jsx'
-import NotFoundPage from './pages/NotFoundPage.jsx'
+import BridgesPage from "./pages/BridgesPage.jsx";
+import NotFoundPage from "./pages/NotFoundPage.jsx";
 
-import ImprentaPage from './pages/ImprentaPage.jsx'
-import AcademicaPage from './pages/AcademicaPage.jsx'
-import CorporativaPage from './pages/CorporativaPage.jsx'
+import AcademicaPage from "./pages/academica/AcademicaPage.jsx";
 
-import tenants from './data/tenants.json'
+import tenants from "./data/tenants.json";
 
-
-const tenantKeys = Object.keys(tenants)
-import { getTenantSlugFromHost } from './lib/tenantResolver.js'
+const tenantKeys = Object.keys(tenants);
+import { getTenantSlugFromHost } from "./lib/tenantResolver.js";
 
 function getTenantPage(tenantSlug) {
   switch (tenantSlug) {
-    case 'imprenta':
-      return ImprentaPage
-    case 'academica':
-      return AcademicaPage
-    case 'corporativa':
-      return CorporativaPage
+    case "academica":
+      return AcademicaPage;
     default:
-      return null
+      return null;
   }
 }
 
 function TenantPageRenderer({ tenantSlug }) {
-  if (!tenantSlug) return <NotFoundPage />
+  if (!tenantSlug) return <NotFoundPage />;
 
-  const tenant = tenants[tenantSlug]
-  const Page = getTenantPage(tenantSlug)
+  const tenant = tenants[tenantSlug];
+  const Page = getTenantPage(tenantSlug);
 
   useEffect(() => {
-    if (!tenant) return
+    if (!tenant) return;
 
-    document.title = tenant.companyName
+    document.title = tenant.companyName;
 
-    const favicon = document.querySelector("link[rel='icon']")
+    const favicon = document.querySelector("link[rel='icon']");
     if (favicon && tenant.favicon) {
-      favicon.href = tenant.favicon
+      favicon.href = tenant.favicon;
     }
-  }, [tenant])
+  }, [tenant]);
 
-  if (!tenant || !Page) return <NotFoundPage />
+  if (!tenant || !Page) return <NotFoundPage />;
 
-  return <Page tenant={tenant} />
+  return <Page tenant={tenant} />;
 }
 
 function TenantSelection() {
   const hostTenant =
-    typeof window !== 'undefined'
+    typeof window !== "undefined"
       ? getTenantSlugFromHost(window.location.hostname)
-      : null
+      : null;
 
   if (hostTenant) {
-    return <TenantPageRenderer tenantSlug={hostTenant} />
+    return <TenantPageRenderer tenantSlug={hostTenant} />;
   }
 
   return (
@@ -77,12 +70,12 @@ function TenantSelection() {
         </div>
       </div>
     </div>
-  )
+  );
 }
 
 function TenantPathPage() {
-  const { tenantSlug } = useParams()
-  return <TenantPageRenderer tenantSlug={tenantSlug} />
+  const { tenantSlug } = useParams();
+  return <TenantPageRenderer tenantSlug={tenantSlug} />;
 }
 
 function App() {
@@ -94,7 +87,7 @@ function App() {
       <Route path="/:tenantSlug" element={<TenantPathPage />} />
       <Route path="*" element={<NotFoundPage />} />
     </Routes>
-  )
+  );
 }
 
-export default App
+export default App;
