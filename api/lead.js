@@ -29,8 +29,8 @@ export default async function handler(req, res) {
             subject: 'Nuevo lead 🚀',
             html: `
                 <p><strong>Email:</strong> ${email}</p>
-                <p>${name}</p>
-                <p>${company}</p>
+                <p><strong>Nombre:</strong>${name}</p>
+                <p><strong>Nombre de la empresa:</strong>${company}</p>
                 <p>${description}</p>
             `,
         })
