@@ -28,9 +28,9 @@ export default async function handler(req, res) {
             reply_to: email,
             subject: 'Nuevo lead 🚀',
             html: `
-                <p><strong>Email:</strong> ${email}</p>
-                <p><strong>Nombre:</strong>${name}</p>
-                <p><strong>Nombre de la empresa:</strong>${company}</p>
+                <p><strong>Email:</strong>   ${email}</p>
+                <p><strong>Nombre:</strong>   ${name}</p>
+                <p><strong>Nombre de la empresa:</strong>   ${company}</p>
                 <p>${description}</p>
             `,
         })
