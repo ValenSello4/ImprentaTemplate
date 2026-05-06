@@ -16,9 +16,9 @@ export default async function handler(req, res) {
     }
 
     try {
-        const { email, description } = req.body
+        const { email, description, name, company } = req.body
 
-        if (!email || !description) {
+        if (!email || !description || !name || !company) {
             return res.status(400).json({ error: "Missing fields" })
         }
 
@@ -29,6 +29,8 @@ export default async function handler(req, res) {
             subject: 'Nuevo lead 🚀',
             html: `
                 <p><strong>Email:</strong> ${email}</p>
+                <p>${name}</p>
+                <p>${company}</p>
                 <p>${description}</p>
             `,
         })

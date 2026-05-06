@@ -7,8 +7,49 @@ import { Globe, Monitor, Wrench, Zap, MapPin } from 'lucide-react'
 export default function BridgesPage() {
     const [open, setOpen] = useState(false)
     const [showForm, setShowForm] = useState(false)
+    const [name, setName] = useState('')
+    const [company, setCompany] = useState('')
     const [email, setEmail] = useState('')
     const [description, setDescription] = useState('')
+    const [sending, setSending] = useState(false)
+
+    const handleSubmit = async () => {
+        if (sending) return
+
+        if (!name || !email || !description) {
+            alert("Completá los campos obligatorios")
+            return
+        }
+
+        try {
+            setSending(true)
+
+            await fetch("/api/lead", {
+                method: "POST",
+                headers: { "Content-Type": "application/json" },
+                body: JSON.stringify({
+                    name,
+                    company,
+                    email,
+                    description
+                }),
+            })
+
+            // limpiar
+            setName('')
+            setCompany('')
+            setEmail('')
+            setDescription('')
+
+            setShowForm(false)
+
+        } catch (error) {
+            console.error(error)
+            alert("Error al enviar el formulario")
+        } finally {
+            setSending(false)
+        }
+    }
 
     const scrollToSection = (id) => {
         const element = document.getElementById(id)
@@ -43,9 +84,9 @@ export default function BridgesPage() {
 
     const stats = [
         { title: 'Ingeniería', label: 'Contamos con conocimientos de análisis e ingeniería en sistemas.' },
-        { title: 'Optimización', label: 'Buscamos la resolución de tus problemas de la forma mas optimizada.'},
+        { title: 'Optimización', label: 'Buscamos la resolución de tus problemas de la forma mas optimizada.' },
         { title: 'Tecnología', label: 'Tenemos conciencia de los avances tecnológicos y su impulso para el desarrollo de sofware.' },
-        
+
     ]
 
     const fadeUp = {
@@ -54,9 +95,9 @@ export default function BridgesPage() {
         viewport: { once: true },
         transition: { duration: 0.6 }
     }
-     const fadeOpacityUp = {
-        initial: { opacity: 0},
-        whileInView: { opacity: 1},
+    const fadeOpacityUp = {
+        initial: { opacity: 0 },
+        whileInView: { opacity: 1 },
         viewport: { once: true },
         transition: { duration: 0.6 }
     }
@@ -235,45 +276,57 @@ export default function BridgesPage() {
                 {showForm && (
                     <motion.div
                         {...fadeOpacityUp}
-                        className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 md:p-32 p-8">
-                        <div className=" bg-white p-8 pb-52 rounded-2xl w-full h-full ">
+                        className="fixed inset-0 bg-black/50 flex items-center justify-center z-50 md:p-32 p-8"
+                    >
+                        <div className="bg-white p-8 pb-16 rounded-2xl w-full h-full overflow-auto">
 
                             <h3 className="text-xl font-bold mb-4">Contanos tu idea</h3>
 
                             <input
+                                type="text"
+                                placeholder="Nombre y apellido *"
+                                className="w-full border p-3 rounded mb-3"
+                                value={name}
+                                onChange={(e) => setName(e.target.value)}
+                            />
+
+                            <input
+                                type="text"
+                                placeholder="Nombre de la empresa"
+                                className="w-full border p-3 rounded mb-3"
+                                value={company}
+                                onChange={(e) => setCompany(e.target.value)}
+                            />
+
+                            <input
                                 type="email"
-                                placeholder="Tu mail"
+                                placeholder="Tu mail *"
                                 className="w-full border p-3 rounded mb-3"
                                 value={email}
                                 onChange={(e) => setEmail(e.target.value)}
                             />
 
                             <textarea
-                                placeholder="Descripción"
-                                className="w-full h-full border p-3 rounded mb-4"
-                                rows={4}
+                                placeholder="Descripción *"
+                                className="w-full border p-3 rounded mb-4 min-h-[120px]"
                                 value={description}
                                 onChange={(e) => setDescription(e.target.value)}
                             />
 
-                            <div className="flex justify-between">
-                                <button onClick={() => setShowForm(false)}>Cancelar</button>
+                            <div className="flex justify-between items-center">
+                                <button onClick={() => setShowForm(false)}>
+                                    Cancelar
+                                </button>
 
                                 <button
-                                    onClick={async () => {
-                                        await fetch("/api/lead", {
-                                            method: "POST",
-                                            headers: { "Content-Type": "application/json" },
-                                            body: JSON.stringify({ email, description }),
-                                        })
-
-                                        setShowForm(false)
-                                        setEmail('')
-                                        setDescription('')
-                                    }}
-                                    className="bg-black text-white px-4 py-2 rounded"
+                                    onClick={handleSubmit}
+                                    disabled={sending}
+                                    className={`px-4 py-2 rounded text-white ${sending
+                                            ? "bg-gray-400 cursor-not-allowed"
+                                            : "bg-black"
+                                        }`}
                                 >
-                                    Enviar
+                                    {sending ? "Enviando..." : "Enviar"}
                                 </button>
                             </div>
 
