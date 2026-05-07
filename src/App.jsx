@@ -5,6 +5,7 @@ import BridgesPage from "./pages/BridgesPage.jsx";
 import NotFoundPage from "./pages/NotFoundPage.jsx";
 
 import AcademicaPage from "./pages/Academica/AcademicaPage.jsx";
+import SolverPage from "./pages/Solver/SolverPage.jsx";
 
 import tenants from "./data/tenants.json";
 
@@ -15,6 +16,8 @@ function getTenantPage(tenantSlug) {
   switch (tenantSlug) {
     case "academica":
       return AcademicaPage;
+    case "solver":
+      return SolverPage;
     default:
       return null;
   }
